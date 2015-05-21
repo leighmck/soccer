@@ -13,8 +13,8 @@ Window {
     //    }
     Item {
         id: root
-        width: 480
-        height: 300
+        width: 600
+        height: 400
         property int duration: 3000
 
         Rectangle {
@@ -39,13 +39,61 @@ Window {
             width: parent.width
             gradient: Gradient {
                 GradientStop {
-                    position: 0.0
-                    color: "#00FF00"
+                    position: 0.00
+                    color: "#00ff00"
                 }
                 GradientStop {
-                    position: 1.0
-                    color: "#00803F"
+                    position: 1.00
+                    color: "#00803f"
                 }
+            }
+        }
+
+        Image {
+            id: ball
+            x: 0
+            y: root.height - height
+            source: "images/soccer_ball.png"
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    ball.x = 0
+                    ball.y = root.height - ball.height
+                    ball.rotation = 0
+                    anim.restart()
+                }
+            }
+        }
+
+        ParallelAnimation {
+            id: anim
+            SequentialAnimation {
+                NumberAnimation {
+                    target: ball
+                    properties: "y"
+                    to: 20
+                    duration: root.duration * 0.4
+                    easing.type: Easing.OutCirc
+                }
+                NumberAnimation {
+                    target: ball
+                    properties: "y"
+                    to: root.height - ball.height
+                    duration: root.duration * 0.6
+                    easing.type: Easing.OutBounce
+                }
+            }
+            NumberAnimation {
+                target: ball
+                properties: "x"
+                to: root.width - ball.width
+                duration: root.duration
+            }
+            RotationAnimation {
+                target: ball
+                properties: "rotation"
+                to: 720
+                duration: root.duration
             }
         }
     }
