@@ -13,14 +13,14 @@ Window {
     //    }
     Item {
         id: root
-        width: 600
-        height: 400
+        width: 800
+        height: 500
         property int duration: 3000
 
         Rectangle {
             id: sky
             width: parent.width
-            height: 200
+            height: 300
             gradient: Gradient {
                 GradientStop {
                     position: 0.0
